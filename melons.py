@@ -2,26 +2,21 @@
 
 class AbstractMelonOrder:
     """An abstract base class that other Melon Order inherit from."""
-    def __init__(self, species, qty):
+    def __init__(self, species, qty, country_code):
         """Initialize melon order attributes."""
 
         self.species = species
         self.qty = qty
         self.shipped = False
-        self.order_type = "domestic"
-        self.tax = 0.08
+        self.country_code = country_code
 
-class DomesticMelonOrder:
+
+class DomesticMelonOrder(AbstractMelonOrder):
     """A melon order within the USA."""
-
-    # def __init__(self, species, qty):
-    #     """Initialize melon order attributes."""
-
-    #     self.species = species
-    #     self.qty = qty
-    #     self.shipped = False
-    #     self.order_type = "domestic"
-    #     self.tax = 0.08
+    country_code = 'USA'
+    order_type = 'domestic'
+    tax = 0.08
+   
 
     def get_total(self):
         """Calculate price, including tax."""
@@ -37,18 +32,21 @@ class DomesticMelonOrder:
         self.shipped = True
 
 
-class InternationalMelonOrder:
+class InternationalMelonOrder(AbstractMelonOrder):
     """An international (non-US) melon order."""
+    
+    order_type = "international"
+    tax = 0.17
 
-    def __init__(self, species, qty, country_code):
-        """Initialize melon order attributes."""
+    
+    #     """Initialize melon order attributes."""
 
-        self.species = species
-        self.qty = qty
-        self.country_code = country_code
-        self.shipped = False
-        self.order_type = "international"
-        self.tax = 0.17
+    #     self.species = species
+    #     self.qty = qty
+    #     self.country_code = country_code
+    #     self.shipped = False
+    #     self.order_type = "international"
+    #     self.tax = 0.17
 
     def get_total(self):
         """Calculate price, including tax."""
